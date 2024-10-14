@@ -1,6 +1,6 @@
 body {
     margin: auto;
-    background-color: rgba(76, 105, 88, 0.8);
+    background-color: rgba(51, 53, 52, 0.8);
 }
 
 :root {
@@ -11,7 +11,73 @@ html {
     font-size: var(--main-font-size);
 }
 
-.header-bascet {
+.bascet {
+    width: 80rem;
+    height: 60rem;
+    background-color: #fff;
+    border-radius: 7px;
+    font-family: 'Montserrat', sans-serif;
+    margin: 5rem auto;
+    padding: 3rem;
+}
+
+/* .header-bascet {
     width: 80rem;
     height: 70rem;
+} */
+
+.header-bascet-name {
+    font-weight: 500;
+    font-size: 5rem;
+    color: #333; 
+}
+
+.header-bascet-group {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding: 0 3rem;
+}
+
+.header-bascet-count {
+    margin: 0 5rem;
+}
+
+
+
+.footer-bascet-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.footer-bascet-name {
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.footer-bascet-price {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: 600;
+    font-size: 2.2rem;
+    padding: 0 3rem;
+}
+
+.footer-bascet-button {
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.footer-bascet-button button {
+    border: 1px solid #8f1c24;
+    border-radius: 5px;
+    background-color: #8f1c24;
+    padding: 0.7rem 2rem;
+    font-weight: 500;
+    font-size: 2.2rem;
+    color: #fff;
+    cursor: pointer;
 }
