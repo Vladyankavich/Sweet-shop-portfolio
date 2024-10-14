@@ -1,0 +1,274 @@
+body {
+    margin: auto;
+}
+
+:root {
+    --main-font-size: 10px;
+}
+
+html {
+    font-size: var(--main-font-size);
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    box-shadow: 1px 1px 15px 0 #eee;
+}
+
+.header-navigation {
+    display: flex;
+}
+
+.header-navigation>ul{
+    width: 40rem;
+    display: inherit;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0;
+}
+
+.header-navigation>ul>li {
+    font-size: 3em;
+    list-style: none;
+    font-weight: 500;
+    display: inline;
+    padding: 0 15px;
+}
+
+#logo {
+    display: block;
+    height: 130px;
+    margin: 0 2rem;
+    background-color: hsl(0, 0%, 90%);
+}
+
+.search-box {
+    padding: 0 2.5rem;
+    position: relative;
+}
+
+.search {
+    width: 30rem;
+    height: 4rem;
+    outline: none;
+    border: 1px solid #333;
+    border-radius: 5.4rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #333;    
+    margin: 0;
+    padding-left: 3rem;
+}
+
+.search-btn {
+    color: #333;
+    position: absolute;
+    top: 1rem;
+    right: 4rem;
+    cursor: pointer;
+}
+
+.search-btn img {
+    width: 2.5rem;
+    height: 2.5rem;   
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: #333;
+    margin: 0.5rem;
+}
+
+.section-one {
+    display: inherit;
+    flex-direction: column;
+    justify-content: start;
+    box-shadow: 1px 1px 10px 0 #eee;
+    padding: 2rem;
+}
+
+.filter-checkbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-weight: 400;
+    font-size: 2rem;
+    margin: 1rem 0 3rem;
+}
+
+.filter-checkbox div {
+    margin-bottom: 0.5rem;
+}
+
+.price_input {
+    margin: 1rem 0.5rem;
+}
+
+.price_start, .price_final {
+    max-width: 5rem;
+}
+
+.section-two {
+    width: 100%;
+    margin: 2rem;    
+}
+
+.cards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.card {
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;    
+    font-size: 2rem;
+    box-shadow: 1px 1px 10px 0 #eee;
+}
+
+.card_image {
+    cursor: pointer;
+}
+
+.card_image img{
+    width: 100%;
+}
+
+.card_name {
+    text-align: center;
+    cursor: pointer;
+}
+
+.card_name:hover {
+    color: #b3252f;
+}
+
+.card_price {
+    font-weight: 900;
+    font-size: 2rem;
+    margin: 2rem 0;
+    color: #93111a;
+}
+
+.card_count {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgb(190, 169, 169);
+}
+
+.card_count div {
+    width: 4rem;
+    height: 2.5rem;
+    text-align: center;
+}
+
+.card_count button {
+    width: 3rem;
+    height: 2.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    margin: 0 1rem;
+    text-align: center;
+    background-color: #fff;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.card_button {
+    width: 12rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0;
+    background-color: #78181f;
+    border: 1px solid rgb(190, 169, 169);
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Montserrat', sans-serif;    
+    font-weight: 600;
+    font-size: 2.5rem;
+    padding-top: 3rem;
+    box-shadow: 1px 1px 15px 0 #eee;
+}
+
+.footer-contacts {
+    display: inherit;
+    flex-direction: column;
+}
+
+.footer-contacts ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-contacts li {
+    font-weight: 500;
+    margin: 1rem;
+}
+
+.footer-messenger {
+    display: inherit;
+    flex-direction: column;    
+}
+
+.footer-messenger ul {
+    display: inherit;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.footer-messenger li {
+    list-style: none;
+}
+
+.footer-information {
+    width: 40rem;
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-email, .footer-address {
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-email a, .footer-address a {
+    font-weight: 500;
+    margin: 1rem;
+}
+
+.icon {
+    width: 3rem;
+}

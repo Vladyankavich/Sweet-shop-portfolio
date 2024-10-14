@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet shop</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./Style/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <nav class="header-navigation">
+            <ul>
+                <li>Товари</li>
+                <li>Про нас</li>
+            </ul>
+        </nav>
+        <img id="logo"
+            src="https://img3.stockfresh.com/files/b/butenkow/m/14/7064478_stock-vector-vector-logo-chocolate.jpg">
+        <div class="search-box">
+            <input type="search" class="search" list="product-names" placeholder="Search">
+            <div class="search-btn">
+                <img src="./Image/icon/search.svg" alt="search">
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="section-one">
+            <div class="filter">
+                <div>Фільтр:</div>
+                <div class="filter-checkbox">
+                    <div><input type="checkbox">Фруктові цукерки</div>
+                    <div><input type="checkbox">Цукерки в коробках</div>
+                    <div><input type="checkbox">Подарункові набори</div>
+                </div>
+            </div>
+            <div class="price">
+                <div>Ціна:</div>
+                <div class="price_input">
+                    <input class="price_start" type="number" value="10">
+                    <input class="price_final" type="number" value="50">
+                    <input type="submit" value="ok">
+                </div>
+            </div>
+        </section>
+        <section class="section-two">
+            <div class="cards">
+                
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-contacts">
+            <div>Контактна інформація:</div>
+            <div>
+                <ul>
+                    <li>+38(093)093-93-93</li>
+                    <li>+38(097)097-97-97</li>
+                    <li>+38(099)099-99-99</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-messenger">
+            <div>Ми в соцмережах:</div>
+            <ul>
+                <li>
+                    <a href="https://uk-ua.facebook.com/" target="_blank">
+                        <img class="icon" src="./image/icon/facebook.svg" alt="facebook"></a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/twitter?lang=uk" target="_blank"><img class="icon"
+                            src="./image/icon/twitter.svg" alt="twiter"></a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/" target="_blank"><img class="icon" 
+                        src="./image/icon/instagram.svg" alt="instagram"></a>
+                </li>
+                <li>
+                    <a href="https://web.telegram.org/" target="_blank"><img class="icon" 
+                        src="./Image/icon/telegram.svg" alt="telegram"></a>
+                </li>
+                <li>
+                    <a href="https://www.viber.com/" target="_blank"><img class="icon" 
+                        src="./image/icon/viber.svg" alt="viber"></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-information">
+            <div class="footer-email">
+                <div>Електронна пошта:</div>
+                <a href="https://www.google.com/intl/ua/gmail/about/" target="_blank">sweetshop@gmail.com</a>
+            </div>
+            <div class="footer-address">
+                <div>Адреса:</div>
+                <a href="https://www.google.com.ua/maps/@50.4573957,30.6012549,15.81z?entry=ttu&g_ep=EgoyMDI0MDgyMy4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank">
+                    Україна, м. Київ, проспект Визволителів, буд, 5
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="./Code/catalog-candies-in-boxes.js"></script>
+    <script src="./Code/catalog-fruit-candies.js"></script>
+    <script src="./Code/catalog-gift-sets.js"></script>
+    <script src="./Code/product.js"></script>
+    <script src="./Code/product-card.js"></script>
+    <script src="./Code/product-manager.js"></script>
+    <script src="./Code/product-card-manager.js"></script>
+    <script src="./Code/index.js"></script>
+</body>
+
+</html>

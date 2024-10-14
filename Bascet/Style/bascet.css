@@ -1,0 +1,17 @@
+body {
+    margin: auto;
+    background-color: rgba(76, 105, 88, 0.8);
+}
+
+:root {
+    --main-font-size: 10px;
+}
+
+html {
+    font-size: var(--main-font-size);
+}
+
+.header-bascet {
+    width: 80rem;
+    height: 70rem;
+}
