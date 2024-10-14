@@ -21,10 +21,9 @@ html {
     padding: 3rem;
 }
 
-/* .header-bascet {
-    width: 80rem;
-    height: 70rem;
-} */
+.header-bascet {
+   position: relative;
+}
 
 .header-bascet-name {
     font-weight: 500;
@@ -42,6 +41,15 @@ html {
 
 .header-bascet-count {
     margin: 0 5rem;
+}
+
+.header-bascet-cross {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
 }
 
 

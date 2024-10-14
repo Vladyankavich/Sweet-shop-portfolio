@@ -47,7 +47,7 @@ a {
 
 #logo {
     display: block;
-    height: 130px;
+    height: 13rem;
     margin: 0 2rem;
     background-color: hsl(0, 0%, 90%);
 }
@@ -82,6 +82,34 @@ a {
 .search-btn img {
     width: 2.5rem;
     height: 2.5rem;   
+}
+
+.logo-bascet {
+    position: relative;
+    width: 4.5rem;
+    height: 4.5rem;
+    padding-right: 3rem;
+    cursor: pointer;
+}
+
+.logo-bascet img {
+    width: 100%;
+}
+
+.logo-bascet-count {
+    position: absolute;
+    top: 0;
+    left: 4rem;
+    width: 1.5rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #b3252f;
+    border-radius: 2px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.5rem;
 }
 
 .main {
