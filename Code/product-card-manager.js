@@ -7,7 +7,7 @@ class ProductCardManager {
 
         const cardGroup = document.createElement("a");
         cardGroup.classList.add("card_group");
-        cardGroup.setAttribute('href',"./Page/page.html")
+        cardGroup.setAttribute('href',"./Page/product-page-index.html")
         
         const cardImage = document.createElement("div");
         cardImage.classList.add("card_image");
@@ -76,7 +76,7 @@ class ProductCardManager {
         return randomProducts;
     }
 
-    // Метод натиску кнопки "Купити" в картці продукту
+    // Метод вибору з масиву картки продукту, в якій натиснута кнопка "Купити"
     subscribeToBuyButtonClickInProductCards(cards, products) {
         cards.forEach(card => {
             card.subscribeToBuyButtonClick(() => {

@@ -8,6 +8,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const catalogGiftSets = [...CATALOGGIFTSETS];
 
     //Змінні
+    const productFilter = new ProductFilter();
     const productManager = new ProductManager();
     const productCardManager = new ProductCardManager();
 
@@ -19,12 +20,42 @@ window.addEventListener("DOMContentLoaded", () => {
     const fruitCandyCards = productCardManager.createProductCardsHTML(fruitCandies);
     const giftSetsCards = productCardManager.createProductCardsHTML(giftSets);
 
-    // Вибір та вивід одного продукту з кожного каталогу продуктів
-    const randomCandiesInBoxesCards = productCardManager.getRandomProductCards(candiesInBoxesCards, 1);
-    const randomFruitCandiesCards = productCardManager.getRandomProductCards(fruitCandyCards, 1);
-    const randomGiftSetsCards = productCardManager.getRandomProductCards(giftSetsCards, 1);
-
+    
     const cards = document.querySelector(".cards"); // Змінна блоку для виводу карток
+
+    productFilter.subscribeToButtonChange(() => {
+        cards.innerHTML = [];
+
+        if(productFilter.isFruitCandy){
+            fruitCandyCards.forEach(card => {
+                cards.append(card.codeHTML);
+            });
+        }
+
+        if(productFilter.isCandiesInBoxes){
+            candiesInBoxesCards.forEach(card => {
+                cards.append(card.codeHTML);
+            });
+        }
+
+        if(productFilter.isGiftSets){
+            giftSetsCards.forEach(card => {
+                cards.append(card.codeHTML);
+            });
+        }
+
+        if(!productFilter.isFruitCandy && !productFilter.isCandiesInBoxes && !productFilter.isGiftSets){
+            fruitCandyCards.forEach(card => {
+                cards.append(card.codeHTML);
+            });
+            candiesInBoxesCards.forEach(card => {
+                cards.append(card.codeHTML);
+            });
+            giftSetsCards.forEach(card => {
+                cards.append(card.codeHTML);
+            });
+        }
+    })
 
     productCardManager.subscribeToBuyButtonClickInProductCards(candiesInBoxesCards, candiesInBoxes);
     productCardManager.subscribeToBuyButtonClickInProductCards(fruitCandyCards, fruitCandies);
@@ -34,13 +65,13 @@ window.addEventListener("DOMContentLoaded", () => {
     productCardManager.subscribeToOpenProductPageButtonClickInProductCards(fruitCandyCards, fruitCandies);
     productCardManager.subscribeToOpenProductPageButtonClickInProductCards(giftSetsCards, giftSets);
 
-    randomFruitCandiesCards.forEach(card => {
+    fruitCandyCards.forEach(card => {
         cards.append(card.codeHTML);
     });
-    randomCandiesInBoxesCards.forEach(card => {
+    candiesInBoxesCards.forEach(card => {
         cards.append(card.codeHTML);
     });
-    randomGiftSetsCards.forEach(card => {
+    giftSetsCards.forEach(card => {
         cards.append(card.codeHTML);
     });
 
