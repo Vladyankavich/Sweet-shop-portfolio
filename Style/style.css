@@ -143,6 +143,14 @@ a {
     margin-bottom: 0.5rem;
 }
 
+.filter-checkbox input {
+    cursor: pointer;
+}
+
+.filter-checkbox span {
+    margin-left: 1rem;
+}
+
 .price_input {
     margin: 1rem 0.5rem;
 }
