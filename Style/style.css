@@ -38,10 +38,10 @@ a {
 }
 
 .header-navigation>ul>li {
+    display: inline;
+    font-weight: 500;
     font-size: 3em;
     list-style: none;
-    font-weight: 500;
-    display: inline;
     padding: 0 15px;
 }
 
@@ -156,7 +156,7 @@ a {
 }
 
 .price_start, .price_final {
-    max-width: 5rem;
+    width: 5rem;
 }
 
 .section-two {
@@ -244,9 +244,6 @@ a {
     cursor: pointer;
 }
 
-
-
-
 .footer {
     display: flex;
     justify-content: space-around;
@@ -258,7 +255,7 @@ a {
 }
 
 .footer-contacts {
-    display: inherit;
+    display: flex;
     flex-direction: column;
 }
 
@@ -273,12 +270,12 @@ a {
 }
 
 .footer-messenger {
-    display: inherit;
+    display: flex;
     flex-direction: column;    
 }
 
 .footer-messenger ul {
-    display: inherit;
+    display: flex;
     justify-content: space-between;
     padding: 0;
 }
@@ -289,13 +286,13 @@ a {
 
 .footer-information {
     width: 40rem;
-    display: inherit;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .footer-email, .footer-address {
-    display: inherit;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
