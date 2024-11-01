@@ -9,4 +9,15 @@ class ProductManager {
 
         return products;
     }
+
+    loadProducts(category, catalog){
+        let products = JSON.parse(sessionStorage.getItem(category));
+
+        if(products == null){
+            products = this.createProducts(category, catalog);
+            sessionStorage.setItem(category, JSON.stringify(products));
+        }
+        
+        return products;
+    }
 }

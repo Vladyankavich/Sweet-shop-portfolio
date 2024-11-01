@@ -77,9 +77,10 @@ class ProductCardManager {
     }
 
     // Метод вибору з масиву картки продукту, в якій натиснута кнопка "Купити"
-    subscribeToBuyButtonClickInProductCards(cards, products) {
+    subscribeToBuyButtonClickInProductCards(cards, products, bascet) {
         cards.forEach(card => {
             card.subscribeToBuyButtonClick(() => {
+                const product = products[card.id];
                 console.log(products[card.id]);            
             })
         });

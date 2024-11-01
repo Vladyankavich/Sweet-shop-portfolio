@@ -11,10 +11,11 @@ window.addEventListener("DOMContentLoaded", () => {
     const productFilter = new ProductFilter();
     const productManager = new ProductManager();
     const productCardManager = new ProductCardManager();
+    const bascet = new Bascet();
 
-    const candiesInBoxes = productManager.createProducts("candiesInBoxes", catalogCandiesInBoxes);
-    const fruitCandies = productManager.createProducts("fruitCandies", catalogFruitCandies);
-    const giftSets = productManager.createProducts("giftSets", catalogGiftSets);
+    const candiesInBoxes = productManager.loadProducts("candiesInBoxes", catalogCandiesInBoxes);
+    const fruitCandies = productManager.loadProducts("fruitCandies", catalogFruitCandies);
+    const giftSets = productManager.loadProducts("giftSets", catalogGiftSets);
 
     const candiesInBoxesCards = productCardManager.createProductCardsHTML(candiesInBoxes);
     const fruitCandyCards = productCardManager.createProductCardsHTML(fruitCandies);
