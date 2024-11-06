@@ -1,5 +1,6 @@
 const CATALOGGIFTSETS = [
     {
+        id: 0,
         name: `Набір цукерок "Київ" (дерев'яна коробка) – 500 г`,
         price: 400,
         image: "./Image/gift-sets/Kyiv.webp",
@@ -7,6 +8,7 @@ const CATALOGGIFTSETS = [
     },
 
     {
+        id: 1,
         name: `Набір цукерок "Львів" (дерев'яна коробка) – 500 г`,
         price: 400,
         image: "./Image/gift-sets/Lviv.webp",
@@ -14,6 +16,7 @@ const CATALOGGIFTSETS = [
     },
 
     {
+        id: 2,
         name: `Набір цукерок "Тюльпани жовто-блакитні" (дерев'яна коробка) – 500 г`,
         price: 400,
         image: "./Image/gift-sets/Tulpany.webp",
@@ -21,6 +24,7 @@ const CATALOGGIFTSETS = [
     },
 
     {
+        id: 3,
         name: `Набір цукерок "Любов у кожній цукерці" (дерев'яна коробка) – 1 кг`,
         price: 600,
         image: "./Image/gift-sets/Love.webp",
@@ -28,6 +32,7 @@ const CATALOGGIFTSETS = [
     },
 
     {
+        id: 4,
         name: `Подарунковий набір цукерок "Все буде Україна" 28 видів - 1 кг`,
         price: 400,
         image: "./Image/gift-sets/Ukraine.webp",

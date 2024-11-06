@@ -1,23 +1,25 @@
 class ProductManager {
+    saveSelectedProduct(product) {
+        sessionStorage.setItem(SELECTED_PRODUCT, JSON.stringify(product));
+    }
+
     createProducts(category, catalog){
         const products = [];
 
-        for (let i = 0; i < catalog.length; i++) {
-            const data = catalog[i];
-            products.push(new Product(i, data.name, data.price, data.image, data.description, category));
-        }
+        catalog.forEach(product => {
+            products.push(new Product(product.id, product.name, product.price, product.image, product.description, category));
+        })
 
         return products;
     }
 
-    loadProducts(category, catalog){
-        let products = JSON.parse(sessionStorage.getItem(category));
+    createAllProducts() {
+        const productsByCategory = new Map([
+            [FRUIT_CANDIES_CATEGORY, this.createProducts(FRUIT_CANDIES_CATEGORY, [...CATALOGFRUITCANDIES])],
+            [CANDIES_IN_BOXES_CATEGORY, this.createProducts(CANDIES_IN_BOXES_CATEGORY, [...CATALOGCANDIESINBOXES])],
+            [GIFT_SETS_CATEGORY, this.createProducts(GIFT_SETS_CATEGORY, [...CATALOGGIFTSETS])]
+        ]);
 
-        if(products == null){
-            products = this.createProducts(category, catalog);
-            sessionStorage.setItem(category, JSON.stringify(products));
-        }
-        
-        return products;
+        return productsByCategory;
     }
 }

@@ -1,5 +1,6 @@
 const CATALOGCANDIESINBOXES = [
     {
+        id: 0,
         name: "Цукерки яблуко з журавлиною в коробці 270г",
         price: 100,
         image: "./Image/candies-in-boxes/YablocoJuravlina.webp",
@@ -7,6 +8,7 @@ const CATALOGCANDIESINBOXES = [
     },
 
     {
+        id: 1,
         name: "Шоколадні цукерки диня в коробці 270г",
         price: 120,
         image: "./Image/candies-in-boxes/Dinya.webp",
@@ -14,6 +16,7 @@ const CATALOGCANDIESINBOXES = [
     },
 
     {
+        id: 2,
         name: "Цукерки в коробках Метеорит 270г",
         price: 90,
         image: "./Image/candies-in-boxes/Meteorit.webp",
@@ -21,6 +24,7 @@ const CATALOGCANDIESINBOXES = [
     },
 
     {
+        id: 3,
         name: "Персик з горіхом – коробка цукерок 270г",
         price: 130,
         image: "./Image/candies-in-boxes/PersicGorih.webp",
@@ -28,6 +32,7 @@ const CATALOGCANDIESINBOXES = [
     },
 
     {
+        id: 4,
         name: "Коробка шоколадних цукерок Халва 270г",
         price: 90,
         image: "./Image/candies-in-boxes/Halva.webp",

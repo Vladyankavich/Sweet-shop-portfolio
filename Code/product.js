@@ -6,7 +6,7 @@ class Product {
         this.image = image;
         this.description = description;
         this.category = category;
-        this.count = 0;
+        this.count = 1;
     }
 
     toJSON() {

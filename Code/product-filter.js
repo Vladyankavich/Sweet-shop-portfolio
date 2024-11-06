@@ -1,8 +1,6 @@
 class ProductFilter {
     constructor() {
-        this.isFruitCandy = false,
-        this.isCandiesInBoxes = false,
-        this.isGiftSets = false
+        this.selectedCategories = new Set();
     }
 
     // Метод підписки на подію натиску кнопки-прапору у фільтрі
@@ -12,17 +10,29 @@ class ProductFilter {
         const giftSetsBtn = document.querySelector(".gift-sets");
 
         fruitCandyBtn.addEventListener("change", (state) => {
-            this.isFruitCandy = state.target.checked;
+            if(state.target.checked) {
+                this.selectedCategories.add(FRUIT_CANDIES_CATEGORY);
+            }else {
+                this.selectedCategories.delete(FRUIT_CANDIES_CATEGORY);
+            }
 
             callback();
         });
         candiesInBoxesBtn.addEventListener("change", (state) => {
-            this.isCandiesInBoxes = state.target.checked;
+            if(state.target.checked) {
+                this.selectedCategories.add(CANDIES_IN_BOXES_CATEGORY);
+            }else {
+                this.selectedCategories.delete(CANDIES_IN_BOXES_CATEGORY);
+            }
 
             callback();
         });
         giftSetsBtn.addEventListener("change", (state) => {
-            this.isGiftSets = state.target.checked;
+            if(state.target.checked) {
+                this.selectedCategories.add(GIFT_SETS_CATEGORY);
+            }else {
+                this.selectedCategories.delete(GIFT_SETS_CATEGORY);
+            }
 
             callback();
         });

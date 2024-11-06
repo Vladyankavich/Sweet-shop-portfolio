@@ -1,23 +1,23 @@
 class ProductCardManager {
     // Створюємо картку продукту
-    createProductCardHTML(product){
-        
-        const card = document.createElement("div");
-        card.classList.add("card");
+    createProductCardHTML(product) {
+
+        const productCard = document.createElement("div");
+        productCard.classList.add("card");
 
         const cardGroup = document.createElement("a");
         cardGroup.classList.add("card_group");
-        cardGroup.setAttribute('href',"./Page/product-page-index.html")
-        
+        cardGroup.setAttribute('href', "./Page/product-page-index.html");
+
         const cardImage = document.createElement("div");
         cardImage.classList.add("card_image");
-        cardImage.innerHTML = `<img src=${product.image} alt="${product.name}">`
+        cardImage.innerHTML = `<img src=${product.image} alt="${product.name}">`;
 
         const cardName = document.createElement("div");
         cardName.classList.add("card_name");
         cardName.innerHTML = `${product.name}`;
 
-        cardGroup.append(cardImage, cardName)
+        cardGroup.append(cardImage, cardName);
 
         const cardPrice = document.createElement("div");
         cardPrice.classList.add("card_price");
@@ -37,64 +37,156 @@ class ProductCardManager {
         const btnPlus = document.createElement("button");
         btnPlus.classList.add("btn_plus");
         btnPlus.innerHTML = `+`;
-        
+
         cardCount.append(btnMinus, count, btnPlus);
 
         const cardButton = document.createElement("div");
         cardButton.classList.add("card_button");
         cardButton.innerHTML = `Купити`;
 
-        card.append(cardGroup, cardPrice, cardCount, cardButton);
+        productCard.append(cardGroup, cardPrice, cardCount, cardButton);
+
+        return productCard;
+
+    }
+
+    createProductCardForBascetHTML(product) {
+
+        const cardBascet = document.createElement("div");
+        cardBascet.classList.add("card_bascet");
+
+        const cardBascetImage = document.createElement("div");
+        cardBascetImage.classList.add("card_bascet_image");
+        cardBascetImage.innerHTML = `<img src=".${product.image}" alt="${product.name}">`
+
+        const cardBascetGroup = document.createElement("div");
+        cardBascetGroup.classList.add("card_bascet_group");
         
-        return card;
+        const cardBascetName = document.createElement("div");
+        cardBascetName.classList.add("card_bascet_name");
+        cardBascetName.innerHTML = `${product.name}`;
+
+        const cardBascetNamePrice = document.createElement("div");
+        cardBascetNamePrice.classList.add("card_bascet_name_price");
+        cardBascetNamePrice.innerHTML = `${product.price} грн`;
+
+        cardBascetGroup.append(cardBascetName, cardBascetNamePrice);
+
+        const cardBascetCount = document.createElement("div");
+        cardBascetCount.classList.add("card_bascet_count");
+
+        const btnMinus = document.createElement("button");
+        btnMinus.classList.add("btn_minus");
+        btnMinus.innerHTML = `-`;
+
+        const count = document.createElement("div");
+        count.classList.add("count");
+        count.innerHTML = `1`;
+
+        const btnPlus = document.createElement("button");
+        btnPlus.classList.add("btn_plus");
+        btnPlus.innerHTML = `+`;
+
+        cardBascetCount.append(btnMinus, count, btnPlus);
+
+        const cardBascetPrice = document.createElement("div");
+        cardBascetPrice.classList.add("card_bascet_price");
+        cardBascetPrice.innerHTML = `${product.price} грн`;
+
+        const cardBascetCross = document.createElement("div");
+        cardBascetCross.classList.add("card_bascet_cross");
+        cardBascetCross.innerHTML = `<img src="../Image/icon/cross.svg" alt="cross">`
+       
+        cardBascet.append(cardBascetImage, cardBascetGroup, cardBascetCount, cardBascetPrice, cardBascetCross);
+
+        return cardBascet;
 
     }
 
     // Метод створення масиву карток
-    createProductCardsHTML(products){
-        const cards = [];
+    createProductCards(products) {
+        const productCards = [];
 
         products.forEach(product => {
-            const card = new ProductCard(product.id, this.createProductCardHTML(product));
+            const productCard = new ProductCard(product.id, product.category, this.createProductCardHTML(product));
 
-            cards.push(card);
+            productCards.push(productCard);
         });
 
-        return cards;
+        return productCards;
+    }
+
+    createAllProductCards(productsByCategories){
+        const productCardsByCategories = new Map([
+            [FRUIT_CANDIES_CATEGORY, this.createProductCards(productsByCategories.get(FRUIT_CANDIES_CATEGORY))],
+            [CANDIES_IN_BOXES_CATEGORY, this.createProductCards(productsByCategories.get(CANDIES_IN_BOXES_CATEGORY))],
+            [GIFT_SETS_CATEGORY, this.createProductCards(productsByCategories.get(GIFT_SETS_CATEGORY))]
+        ]);
+
+        return productCardsByCategories;
+    }
+
+    // Метод створення масиву карток для корзини
+    createProductCardsForBascet(products) {
+        const productCards = [];
+
+        products.forEach(product => {
+            const productCard = new ProductCard(product.id, product.category, this.createProductCardForBascetHTML(product));
+
+            productCards.push(productCard);
+        });
+
+        return productCards;
+    }
+
+    removeProductCardForBascet(productCards, product) {
+        for (let i = 0; i < productCards.length; i++) {
+            const productCard = productCards[i];
+
+            if (productCard.id == product.id && productCard.category == product.category) {
+                productCards.splice(i, 1);
+                
+                break;
+            }
+        }
     }
 
     // Метод випадкового вибору карток з каталогу продуктів
-    getRandomProductCards(cards, count) {
+    getRandomProductCards(productCards, count) {
         const randomProducts = []; // Ствозюємо пустий масив, куди будемо додавати товари
-                
+
         for (let i = 0; i < count; i++) {
-            const randomProductIndex = Math.floor(Math.random() * cards.length); // Отримуємо випадковий індекс товару
-            randomProducts.push(cards[randomProductIndex]); // Додаємо в масив товар 
-            // cards.splice(randomProductIndex, 1); // Видаляємо вибраний товар з копії каталогу
+            const randomProductIndex = Math.floor(Math.random() * productCards.length); // Отримуємо випадковий індекс товару
+            randomProducts.push(productCards[randomProductIndex]); // Додаємо в масив товар 
+            // productCards.splice(randomProductIndex, 1); // Видаляємо вибраний товар з копії каталогу
         }
-        
+
         return randomProducts;
     }
 
     // Метод вибору з масиву картки продукту, в якій натиснута кнопка "Купити"
-    subscribeToBuyButtonClickInProductCards(cards, products, bascet) {
-        cards.forEach(card => {
-            card.subscribeToBuyButtonClick(() => {
-                const product = products[card.id];
-                console.log(products[card.id]);            
-            })
+    subscribeToBuyButtonClickInProductCards(productCards, callback) {
+        productCards.forEach(productCard => {
+            productCard.subscribeToBuyButtonClick(() => {
+                callback(productCard);
+            });
         });
     }
 
     // Метод натиску картки продукту, щоб відкрити окрему картку цього продукту
-    subscribeToOpenProductPageButtonClickInProductCards(cards, products) {
-        cards.forEach(card => {
-            card.subscribeToOpenProductPageButtonClick(() => {
-                const product = products[card.id];
-                
-                sessionStorage.setItem("selectedProduct", JSON.stringify(product));
-                                           
-            })
+    subscribeToOpenProductPageButtonClickInProductCards(productCards, callback) {
+        productCards.forEach(productCard => {
+            productCard.subscribeToOpenProductPageButtonClick(() => {
+                callback(productCard);
+            });
+        });
+    }
+
+    subscribeToRemoveProductFromBascetButtonClickInProductCards(productCards, callback) {
+        productCards.forEach(productCard => {
+            productCard.subscribeToRemoveProductFromBascetButtonClick(() => {
+                callback(productCard);
+            });
         });
     }
 }

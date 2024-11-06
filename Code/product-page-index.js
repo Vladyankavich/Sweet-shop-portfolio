@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
     const productPageManager = new ProductPageManager();
-    const productJSON = sessionStorage.getItem("selectedProduct");
+    const productJSON = sessionStorage.getItem(SELECTED_PRODUCT);
     const product = new Product();
     product.parseJSON(JSON.parse(productJSON));
     console.log(product);

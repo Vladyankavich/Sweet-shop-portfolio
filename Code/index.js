@@ -1,81 +1,55 @@
-// const productManager = new ProductManager();
-// const productCardManager = new ProductCardManager();
-
 window.addEventListener("DOMContentLoaded", () => {
-    // Копіюємо каталоги товарів, щоб не змінювати оригінал
-    const catalogCandiesInBoxes = [...CATALOGCANDIESINBOXES];
-    const catalogFruitCandies = [...CATALOGFRUITCANDIES];
-    const catalogGiftSets = [...CATALOGGIFTSETS];
-
     //Змінні
     const productFilter = new ProductFilter();
     const productManager = new ProductManager();
     const productCardManager = new ProductCardManager();
-    const bascet = new Bascet();
+    const bascetManager = new BascetManager();
+    const productsByCategories = productManager.createAllProducts();
+    const bascet = bascetManager.loadBascet(productsByCategories);
+    const productCardsByCategories = productCardManager.createAllProductCards(productsByCategories);
 
-    const candiesInBoxes = productManager.loadProducts("candiesInBoxes", catalogCandiesInBoxes);
-    const fruitCandies = productManager.loadProducts("fruitCandies", catalogFruitCandies);
-    const giftSets = productManager.loadProducts("giftSets", catalogGiftSets);
-
-    const candiesInBoxesCards = productCardManager.createProductCardsHTML(candiesInBoxes);
-    const fruitCandyCards = productCardManager.createProductCardsHTML(fruitCandies);
-    const giftSetsCards = productCardManager.createProductCardsHTML(giftSets);
-
-    
     const cards = document.querySelector(".cards"); // Змінна блоку для виводу карток
 
     productFilter.subscribeToButtonChange(() => {
         cards.innerHTML = [];
 
-        if(productFilter.isFruitCandy){
-            fruitCandyCards.forEach(card => {
-                cards.append(card.codeHTML);
+        productFilter.selectedCategories.forEach(selectedCategory => {
+            productCardsByCategories.get(selectedCategory).forEach(productCard => {
+                cards.append(productCard.codeHTML);
+            });
+        });
+
+        if(productFilter.selectedCategories.size == 0) {
+            productCardsByCategories.forEach((productCards) => {
+                productCards.forEach(productCard => {
+                    cards.append(productCard.codeHTML);
+                });
             });
         }
-
-        if(productFilter.isCandiesInBoxes){
-            candiesInBoxesCards.forEach(card => {
-                cards.append(card.codeHTML);
-            });
-        }
-
-        if(productFilter.isGiftSets){
-            giftSetsCards.forEach(card => {
-                cards.append(card.codeHTML);
-            });
-        }
-
-        if(!productFilter.isFruitCandy && !productFilter.isCandiesInBoxes && !productFilter.isGiftSets){
-            fruitCandyCards.forEach(card => {
-                cards.append(card.codeHTML);
-            });
-            candiesInBoxesCards.forEach(card => {
-                cards.append(card.codeHTML);
-            });
-            giftSetsCards.forEach(card => {
-                cards.append(card.codeHTML);
-            });
-        }
-    })
-
-    productCardManager.subscribeToBuyButtonClickInProductCards(candiesInBoxesCards, candiesInBoxes);
-    productCardManager.subscribeToBuyButtonClickInProductCards(fruitCandyCards, fruitCandies);
-    productCardManager.subscribeToBuyButtonClickInProductCards(giftSetsCards, giftSets);
-
-    productCardManager.subscribeToOpenProductPageButtonClickInProductCards(candiesInBoxesCards, candiesInBoxes);
-    productCardManager.subscribeToOpenProductPageButtonClickInProductCards(fruitCandyCards, fruitCandies);
-    productCardManager.subscribeToOpenProductPageButtonClickInProductCards(giftSetsCards, giftSets);
-
-    fruitCandyCards.forEach(card => {
-        cards.append(card.codeHTML);
-    });
-    candiesInBoxesCards.forEach(card => {
-        cards.append(card.codeHTML);
-    });
-    giftSetsCards.forEach(card => {
-        cards.append(card.codeHTML);
     });
 
+    productCardsByCategories.forEach((productCards, productCategory) => {
+        
+        productCardManager.subscribeToBuyButtonClickInProductCards(productCards, (productCard) => {
+            const product = productsByCategories.get(productCategory)[productCard.id];
 
+            bascet.add(product);
+            console.log(bascet);
+
+            bascetManager.saveBascet(bascet);
+        });
+
+        productCardManager.subscribeToOpenProductPageButtonClickInProductCards(productCards, (productCard) => {
+            const product = productsByCategories.get(productCategory)[productCard.id];
+
+            productManager.saveSelectedProduct(product);
+        });
+    });
+
+    productCardsByCategories.forEach((productCards) => {
+        productCards.forEach(productCard => {
+            cards.append(productCard.codeHTML);
+        });
+    });
 
 })
