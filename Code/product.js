@@ -30,4 +30,8 @@ class Product {
         this.category = json.category;
         this.count = json.count;
     }
+
+    totalPrice() {
+        return (this.price * this.count);
+    }
 }

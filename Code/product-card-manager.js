@@ -32,7 +32,7 @@ class ProductCardManager {
 
         const count = document.createElement("div");
         count.classList.add("count");
-        count.innerHTML = `1`;
+        count.innerHTML = `${product.count}`;
 
         const btnPlus = document.createElement("button");
         btnPlus.classList.add("btn_plus");
@@ -61,7 +61,7 @@ class ProductCardManager {
 
         const cardBascetGroup = document.createElement("div");
         cardBascetGroup.classList.add("card_bascet_group");
-        
+
         const cardBascetName = document.createElement("div");
         cardBascetName.classList.add("card_bascet_name");
         cardBascetName.innerHTML = `${product.name}`;
@@ -81,7 +81,7 @@ class ProductCardManager {
 
         const count = document.createElement("div");
         count.classList.add("count");
-        count.innerHTML = `1`;
+        count.innerHTML = `${product.count}`;
 
         const btnPlus = document.createElement("button");
         btnPlus.classList.add("btn_plus");
@@ -91,12 +91,12 @@ class ProductCardManager {
 
         const cardBascetPrice = document.createElement("div");
         cardBascetPrice.classList.add("card_bascet_price");
-        cardBascetPrice.innerHTML = `${product.price} грн`;
+        cardBascetPrice.innerHTML = `${product.totalPrice()} грн`;
 
         const cardBascetCross = document.createElement("div");
         cardBascetCross.classList.add("card_bascet_cross");
         cardBascetCross.innerHTML = `<img src="../Image/icon/cross.svg" alt="cross">`
-       
+
         cardBascet.append(cardBascetImage, cardBascetGroup, cardBascetCount, cardBascetPrice, cardBascetCross);
 
         return cardBascet;
@@ -116,27 +116,33 @@ class ProductCardManager {
         return productCards;
     }
 
-    createAllProductCards(productsByCategories){
-        const productCardsByCategories = new Map([
-            [FRUIT_CANDIES_CATEGORY, this.createProductCards(productsByCategories.get(FRUIT_CANDIES_CATEGORY))],
-            [CANDIES_IN_BOXES_CATEGORY, this.createProductCards(productsByCategories.get(CANDIES_IN_BOXES_CATEGORY))],
-            [GIFT_SETS_CATEGORY, this.createProductCards(productsByCategories.get(GIFT_SETS_CATEGORY))]
-        ]);
+    createAllProductCards(productsByCategories) {
+        const productCardsByCategories = new Map();
+
+        productsByCategories.forEach((product, productCategory) => {
+            productCardsByCategories.set(productCategory, this.createProductCards(product));
+        });
 
         return productCardsByCategories;
     }
 
     // Метод створення масиву карток для корзини
-    createProductCardsForBascet(products) {
-        const productCards = [];
+    createProductCardsForBascet(productsFromBascet) {
+        const productCardsByCategories = new Map();
 
-        products.forEach(product => {
+        productsFromBascet.forEach(product => {
             const productCard = new ProductCard(product.id, product.category, this.createProductCardForBascetHTML(product));
 
-            productCards.push(productCard);
+            if (productCardsByCategories.has(product.category)) {
+                const productCards = productCardsByCategories.get(product.category);
+                productCards.push(productCard);
+            } else {
+                const productCards = [productCard];
+                productCardsByCategories.set(product.category, productCards);
+            }
         });
 
-        return productCards;
+        return productCardsByCategories;
     }
 
     removeProductCardForBascet(productCards, product) {
@@ -145,7 +151,7 @@ class ProductCardManager {
 
             if (productCard.id == product.id && productCard.category == product.category) {
                 productCards.splice(i, 1);
-                
+
                 break;
             }
         }
@@ -182,9 +188,28 @@ class ProductCardManager {
         });
     }
 
+    // Метод натиску кнопки видалення товару з корзини
     subscribeToRemoveProductFromBascetButtonClickInProductCards(productCards, callback) {
         productCards.forEach(productCard => {
             productCard.subscribeToRemoveProductFromBascetButtonClick(() => {
+                callback(productCard);
+            });
+        });
+    }
+
+    // Метод збільшення кількості певного товару в корзині
+    subscribeToIncreaseCountButtonClickInProductCards(productCards, callback) {
+        productCards.forEach(productCard => {
+            productCard.subscribeToIncreaseCountButtonClick(() => {
+                callback(productCard);
+            });
+        });
+    }
+
+    // Метод зменшення кількості певного товару в корзині
+    subscribeToReduceCountButtonClickInProductCards(productCards, callback) {
+        productCards.forEach(productCard => {
+            productCard.subscribeToReduceCountButtonClick(() => {
                 callback(productCard);
             });
         });

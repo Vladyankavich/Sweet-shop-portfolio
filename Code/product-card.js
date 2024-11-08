@@ -25,4 +25,18 @@ class ProductCard {
 
         btn.addEventListener("click", callback);
     }
+
+    // Метод підписки на подію натиску кнопки "+" в лічильнику кількості товарів
+    subscribeToIncreaseCountButtonClick(callback) {
+        const btn = this.codeHTML.querySelector(".btn_plus");
+
+        btn.addEventListener("click", callback);
+    }
+
+    // Метод підписки на подію натиску кнопки "-" в лічильнику кількості товарів
+    subscribeToReduceCountButtonClick(callback) {
+        const btn = this.codeHTML.querySelector(".btn_minus");
+
+        btn.addEventListener("click", callback);
+    }
 }

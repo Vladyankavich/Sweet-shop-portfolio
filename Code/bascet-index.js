@@ -1,15 +1,22 @@
-function displayProductCards(productCards, productsByCategories) {
+function displayProductCardsHTML(productCardsByCategories, productsByCategories) {
     const cards = document.querySelector(".main-bascet");
     const totalPriceText = document.querySelector(".footer-bascet-price span");
     let totalPrice = 0;
 
     cards.innerHTML = "";
 
-    productCards.forEach(productCard => {
-        const product = productsByCategories.get(productCard.category)[productCard.id];
-        totalPrice += product.price * product.count;
+    productCardsByCategories.forEach((productCards, productCategory) => {
+        productCards.forEach(productCard => {
+            const product = productsByCategories.get(productCategory)[productCard.id];
+            const productsCountText = productCard.codeHTML.querySelector(".count");
+            const productPriceText = productCard.codeHTML.querySelector(".card_bascet_price");
 
-        cards.append(productCard.codeHTML);
+            totalPrice += product.totalPrice();
+            productsCountText.innerText = `${product.count}`;
+            productPriceText.innerText = `${product.totalPrice()}`;
+
+            cards.append(productCard.codeHTML);
+        });
     });
 
     totalPriceText.innerText = totalPrice;
@@ -21,17 +28,44 @@ window.addEventListener("DOMContentLoaded", () => {
     const productCardManager = new ProductCardManager();
     const productsByCategories = productManager.createAllProducts();
     const bascet = bascetManager.loadBascet(productsByCategories);
-    const productCards = productCardManager.createProductCardsForBascet(bascet.products);
-    
-    productCardManager.subscribeToRemoveProductFromBascetButtonClickInProductCards(productCards, (productCard) => {
-        const product = productsByCategories.get(productCard.category)[productCard.id];
+    const productCardsByCategories = productCardManager.createProductCardsForBascet(bascet.products);
+    console.log(productCardsByCategories);
 
-        bascet.remove(product);
-        bascetManager.saveBascet(bascet);
-        productCardManager.removeProductCardForBascet(productCards, product);
+    productCardsByCategories.forEach((productCards, productCategory) => {
+        productCardManager.subscribeToRemoveProductFromBascetButtonClickInProductCards(productCards, (productCard) => {
+            const product = productsByCategories.get(productCategory)[productCard.id];
 
-        displayProductCards(productCards, productsByCategories);
+            bascet.remove(product);
+            bascetManager.saveBascet(bascet);
+            productCardManager.removeProductCardForBascet(productCards, product);
+
+            displayProductCardsHTML(productCardsByCategories, productsByCategories);
+        });
+
+        productCardManager.subscribeToIncreaseCountButtonClickInProductCards(productCards, (productCard) => {
+            const product = productsByCategories.get(productCategory)[productCard.id];
+            
+            if(product.count < MAX_PRODUCTS_COUNT) {
+                product.count++;
+            }
+
+            bascetManager.saveBascet(bascet);
+
+            displayProductCardsHTML(productCardsByCategories, productsByCategories);
+        });
+
+        productCardManager.subscribeToReduceCountButtonClickInProductCards(productCards, (productCard) => {
+            const product = productsByCategories.get(productCategory)[productCard.id];
+            
+            if(product.count > MIN_PRODUCTS_COUNT) {
+                product.count--;
+            }
+
+            bascetManager.saveBascet(bascet);
+
+            displayProductCardsHTML(productCardsByCategories, productsByCategories);
+        });
     });
 
-    displayProductCards(productCards, productsByCategories);
+    displayProductCardsHTML(productCardsByCategories, productsByCategories);
 })
