@@ -1,9 +1,22 @@
-class ProductManager {
+import { Product } from "./product.js";
+import { FRUIT_CANDIES_CATEGORY, CANDIES_IN_BOXES_CATEGORY, GIFT_SETS_CATEGORY, SELECTED_PRODUCT } from "./constants.js"
+import { CATALOGFRUITCANDIES } from "./catalog-fruit-candies.js";
+import { CATALOGCANDIESINBOXES } from "./catalog-candies-in-boxes.js";
+import { CATALOGGIFTSETS } from "./catalog-gift-sets.js";
+
+export class ProductManager {
     saveSelectedProduct(product) {
         sessionStorage.setItem(SELECTED_PRODUCT, JSON.stringify(product));
     }
 
-    createProducts(category, catalog){
+    loadSelectedProduct(productsByCategories) {
+        const selectedProduct = JSON.parse(sessionStorage.getItem(SELECTED_PRODUCT));
+        const product = productsByCategories.get(selectedProduct.category)[selectedProduct.id];
+
+        return product;
+    }
+
+    createProducts(category, catalog) {
         const products = [];
 
         catalog.forEach(product => {

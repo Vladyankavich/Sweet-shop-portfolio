@@ -1,4 +1,6 @@
-class ProductCardManager {
+import { ProductCard } from "./product-card.js"
+
+export class ProductCardManager {
     // Створюємо картку продукту
     createProductCardHTML(product) {
 
@@ -48,6 +50,22 @@ class ProductCardManager {
 
         return productCard;
 
+    }
+
+    updateProductCardHTML(product, productCard, inBascet) {
+        const productsCountText = productCard.codeHTML.querySelector(".count");
+        const productBuyButton = productCard.codeHTML.querySelector(".card_button");        
+        const productPriceText = productCard.codeHTML.querySelector(".card_price");
+    
+        if (inBascet) {
+            productBuyButton.innerText = "У кошику";
+        }
+        else{
+            productBuyButton.innerText = "Купити";
+        }
+    
+        productsCountText.innerText = `${product.count}`;
+        productPriceText.innerText = `${product.price} грн`;
     }
 
     createProductCardForBascetHTML(product) {
@@ -101,6 +119,14 @@ class ProductCardManager {
 
         return cardBascet;
 
+    }
+
+    updateProductCardForBascetHTML(product, productCard) {
+        const productsCountText = productCard.codeHTML.querySelector(".count");      
+        const productPriceText = productCard.codeHTML.querySelector(".card_bascet_price");
+    
+        productsCountText.innerText = `${product.count}`;
+        productPriceText.innerText = `${product.price} грн`;
     }
 
     // Метод створення масиву карток

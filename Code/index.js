@@ -1,13 +1,12 @@
-function updateProductCardInfoHTML(product, productCard, bascet) {
-    const productsCountText = productCard.codeHTML.querySelector(".count");
-    const productBuyButton = productCard.codeHTML.querySelector(".card_button");
+import { ProductFilter } from "./product-filter.js";
+import { ProductManager } from "./product-manager.js";
+import { ProductCardManager } from "./product-card-manager.js";
+import { BascetManager } from "./bascet-manager.js";
+import { MAX_PRODUCTS_COUNT, MIN_PRODUCTS_COUNT } from "./constants.js";
 
-    if (bascet.has(product)) {
-        productBuyButton.innerText = "У кошику";
-    }
-
-    productsCountText.innerText = `${product.count}`;
-}
+const productManager = new ProductManager();
+const productCardManager = new ProductCardManager();
+const bascetManager = new BascetManager();
 
 function updateBascetInfoHTML(bascet) {
     const productsCountText = document.querySelector(".logo-bascet-count");
@@ -28,8 +27,7 @@ function displayProductCardsHTML(productCardsByCategories, productsByCategories,
             const product = productsByCategories.get(productCategory)[productCard.id];
 
             cards.append(productCard.codeHTML);
-
-            updateProductCardInfoHTML(product, productCard, bascet);
+            productCardManager.updateProductCardHTML(product, productCard, bascet.has(product));
         });
     });
 }
@@ -37,9 +35,6 @@ function displayProductCardsHTML(productCardsByCategories, productsByCategories,
 window.addEventListener("DOMContentLoaded", () => {
     //Змінні
     const productFilter = new ProductFilter();
-    const productManager = new ProductManager();
-    const productCardManager = new ProductCardManager();
-    const bascetManager = new BascetManager();
     const productsByCategories = productManager.createAllProducts();
     const bascet = bascetManager.loadBascet(productsByCategories);
     const productCardsByCategories = productCardManager.createAllProductCards(productsByCategories);
@@ -67,9 +62,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
             bascet.add(product);
             bascetManager.saveBascet(bascet);
+            productCardManager.updateProductCardHTML(product, productCard, bascet.has(product));
 
             updateBascetInfoHTML(bascet);
-            updateProductCardInfoHTML(product, productCard, bascet);
         });
 
         productCardManager.subscribeToOpenProductPageButtonClickInProductCards(productCards, (productCard) => {
@@ -86,9 +81,9 @@ window.addEventListener("DOMContentLoaded", () => {
             }
 
             bascetManager.saveBascet(bascet);
+            productCardManager.updateProductCardHTML(product, productCard, bascet.has(product));
 
             updateBascetInfoHTML(bascet);
-            updateProductCardInfoHTML(product, productCard, bascet);
         });
 
         productCardManager.subscribeToReduceCountButtonClickInProductCards(productCards, (productCard) => {
@@ -99,9 +94,9 @@ window.addEventListener("DOMContentLoaded", () => {
             }
 
             bascetManager.saveBascet(bascet);
+            productCardManager.updateProductCardHTML(product, productCard, bascet.has(product));
 
             updateBascetInfoHTML(bascet);
-            updateProductCardInfoHTML(product, productCard, bascet);
         });
     });
 

@@ -1,4 +1,4 @@
-class ProductCard {
+export class ProductCard {
     constructor(id, category, codeHTML) {
         this.id = id;
         this.category = category;

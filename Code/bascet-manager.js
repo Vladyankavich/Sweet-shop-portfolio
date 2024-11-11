@@ -1,4 +1,7 @@
-class BascetManager {
+import { Bascet } from "./bascet.js";
+import { BASCET } from "./constants.js"
+
+export class BascetManager {
     loadBascet (productsByCategories) {
         const productsFromBascet = JSON.parse(sessionStorage.getItem(BASCET));
         const bascet = new Bascet();
@@ -18,6 +21,5 @@ class BascetManager {
 
     saveBascet(bascet) {
         sessionStorage.setItem(BASCET, JSON.stringify(bascet));
-    }
-    
+    }    
 }

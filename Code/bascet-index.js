@@ -1,3 +1,12 @@
+import { ProductManager } from "./product-manager.js";
+import { ProductCardManager } from "./product-card-manager.js";
+import { BascetManager } from "./bascet-manager.js";
+import { MAX_PRODUCTS_COUNT, MIN_PRODUCTS_COUNT } from "./constants.js";
+
+const bascetManager = new BascetManager();
+const productManager = new ProductManager();
+const productCardManager = new ProductCardManager();
+
 function displayProductCardsHTML(productCardsByCategories, productsByCategories) {
     const cards = document.querySelector(".main-bascet");
     const totalPriceText = document.querySelector(".footer-bascet-price span");
@@ -8,14 +17,11 @@ function displayProductCardsHTML(productCardsByCategories, productsByCategories)
     productCardsByCategories.forEach((productCards, productCategory) => {
         productCards.forEach(productCard => {
             const product = productsByCategories.get(productCategory)[productCard.id];
-            const productsCountText = productCard.codeHTML.querySelector(".count");
-            const productPriceText = productCard.codeHTML.querySelector(".card_bascet_price");
-
+            
             totalPrice += product.totalPrice();
-            productsCountText.innerText = `${product.count}`;
-            productPriceText.innerText = `${product.totalPrice()}`;
-
+            
             cards.append(productCard.codeHTML);
+            productCardManager.updateProductCardForBascetHTML(product, productCard);
         });
     });
 
@@ -23,9 +29,6 @@ function displayProductCardsHTML(productCardsByCategories, productsByCategories)
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    const bascetManager = new BascetManager();
-    const productManager = new ProductManager();
-    const productCardManager = new ProductCardManager();
     const productsByCategories = productManager.createAllProducts();
     const bascet = bascetManager.loadBascet(productsByCategories);
     const productCardsByCategories = productCardManager.createProductCardsForBascet(bascet.products);

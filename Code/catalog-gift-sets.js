@@ -1,4 +1,4 @@
-const CATALOGGIFTSETS = [
+export const CATALOGGIFTSETS = [
     {
         id: 0,
         name: `Набір цукерок "Київ" (дерев'яна коробка) – 500 г`,

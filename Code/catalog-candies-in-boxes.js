@@ -1,4 +1,4 @@
-const CATALOGCANDIESINBOXES = [
+ export const CATALOGCANDIESINBOXES = [
     {
         id: 0,
         name: "Цукерки яблуко з журавлиною в коробці 270г",

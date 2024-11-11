@@ -1,4 +1,6 @@
-class ProductFilter {
+import { FRUIT_CANDIES_CATEGORY, CANDIES_IN_BOXES_CATEGORY, GIFT_SETS_CATEGORY } from "./constants.js"
+
+export class ProductFilter {
     constructor() {
         this.selectedCategories = new Set();
     }
@@ -37,5 +39,4 @@ class ProductFilter {
             callback();
         });
     }
-
 }

@@ -1,4 +1,4 @@
-class Bascet {
+export class Bascet {
     constructor() {
         this.products = [];
     }

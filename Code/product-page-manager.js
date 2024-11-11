@@ -1,4 +1,6 @@
-class ProductPageManager {
+import { ProductPage } from "./product-page.js";
+
+export class ProductPageManager {
     // Створюємо картку продукту
     createProductPageHTML (product) {
         const productPage = document.createElement("div");
@@ -10,11 +12,11 @@ class ProductPageManager {
 
         const sectionInformation = document.createElement("section");
         sectionInformation.classList.add("section-information");
-        
+
         const productName = document.createElement("div");
         productName.classList.add("product-name");
         productName.innerHTML = `${product.name}`;
-        
+
         const productPrice = document.createElement("div");
         productPrice.classList.add("product-price");
         productPrice.innerHTML = `${product.price} грн`;
@@ -31,7 +33,7 @@ class ProductPageManager {
 
         const productsCount = document.createElement("div");
         productsCount.classList.add("products_count");
-        productsCount.innerHTML = `1`;
+        productsCount.innerHTML = `${product.count}`;
 
         const productBtnPlus = document.createElement("button");
         productBtnPlus.classList.add("product_btn_plus");
@@ -52,6 +54,28 @@ class ProductPageManager {
         sectionInformation.append(productName, productPrice, productGroup, productDescription);
 
         productPage.append(sectionImage, sectionInformation);
+
+        return productPage;
+    }
+
+    updateProductPageHTML(product, productPage, inBascet) {
+        const productsCountText = productPage.codeHTML.querySelector(".products_count");
+        const productBuyButton = productPage.codeHTML.querySelector(".product_button");        
+        const productPriceText = productPage.codeHTML.querySelector(".product-price");
+    
+        if (inBascet) {
+            productBuyButton.innerText = "У кошику";
+        }
+        else{
+            productBuyButton.innerText = "Купити";
+        }
+    
+        productsCountText.innerText = `${product.count}`;
+        productPriceText.innerText = `${product.price} грн`;
+    }
+
+    createProductPage(product) {
+        const productPage = new ProductPage(product.id, product.category, this.createProductPageHTML(product));
 
         return productPage;
     }

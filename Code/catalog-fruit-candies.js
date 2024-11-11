@@ -1,4 +1,4 @@
-const CATALOGFRUITCANDIES = [
+export const CATALOGFRUITCANDIES = [
     {
         id: 0,
         name: 'Цукерки "Фінік з горіхом у темній глазурі" - 1 кг',
