@@ -65,6 +65,8 @@ export class ProductPageManager {
     
         if (inBascet) {
             productBuyButton.innerText = "У кошику";
+            productBuyButton.style.backgroundColor = "white";
+            productBuyButton.style.color = "#78181f";
         }
         else{
             productBuyButton.innerText = "Купити";

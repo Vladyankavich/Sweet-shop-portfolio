@@ -7,6 +7,7 @@ import { MAX_PRODUCTS_COUNT, MIN_PRODUCTS_COUNT } from "./constants.js";
 const productManager = new ProductManager();
 const productCardManager = new ProductCardManager();
 const bascetManager = new BascetManager();
+const productFilter = new ProductFilter();
 
 function updateBascetInfoHTML(bascet) {
     const productsCountText = document.querySelector(".logo-bascet-count");
@@ -34,12 +35,47 @@ function displayProductCardsHTML(productCardsByCategories, productsByCategories,
 
 window.addEventListener("DOMContentLoaded", () => {
     //Змінні
-    const productFilter = new ProductFilter();
     const productsByCategories = productManager.createAllProducts();
     const bascet = bascetManager.loadBascet(productsByCategories);
     const productCardsByCategories = productCardManager.createAllProductCards(productsByCategories);
 
-    productFilter.subscribeToButtonChange(() => {
+    productFilter.subscribeToProductCategoryButtonChange(() => {
+        const cards = document.querySelector(".cards"); // Змінна блоку для виводу карток
+
+        cards.innerHTML = [];
+
+        if (!productFilter.active && productFilter.selectedCategories.size > 0) {
+            productFilter.selectedCategories.forEach(selectedCategory => {
+                productCardsByCategories.get(selectedCategory).forEach(productCard => {
+                    cards.append(productCard.codeHTML);
+                });
+            });
+        } else if (productFilter.active && productFilter.selectedCategories.size > 0) {
+            productFilter.selectedCategories.forEach(selectedCategory => {
+                productCardsByCategories.get(selectedCategory).forEach(productCard => {
+                    const product = productsByCategories.get(selectedCategory)[productCard.id];
+
+                    if (productFilter.checkPriceRange(product.price)) {
+                        cards.append(productCard.codeHTML);
+                    }
+                });
+            });
+        } else if (productFilter.active && productFilter.selectedCategories.size == 0) {
+            productCardsByCategories.forEach((productCards, productCategory) => {
+                productCards.forEach(productCard => {
+                    const product = productsByCategories.get(productCategory)[productCard.id];
+
+                    if (productFilter.checkPriceRange(product.price)) {
+                        cards.append(productCard.codeHTML);
+                    }
+                });
+            });
+        } else {
+            displayProductCardsHTML(productCardsByCategories, productsByCategories, bascet);
+        }
+    });
+
+    productFilter.subscribeToConfirmButton(() => {
         const cards = document.querySelector(".cards"); // Змінна блоку для виводу карток
 
         cards.innerHTML = [];
@@ -47,12 +83,29 @@ window.addEventListener("DOMContentLoaded", () => {
         if (productFilter.selectedCategories.size > 0) {
             productFilter.selectedCategories.forEach(selectedCategory => {
                 productCardsByCategories.get(selectedCategory).forEach(productCard => {
-                    cards.append(productCard.codeHTML);
+                    const product = productsByCategories.get(selectedCategory)[productCard.id];
+
+                    console.log(productFilter.checkPriceRange(product.price));
+                    if (productFilter.checkPriceRange(product.price)) {
+                        cards.append(productCard.codeHTML);
+                    }
                 });
             });
         } else {
-            displayProductCardsHTML(productCardsByCategories, productsByCategories, bascet);
+            productCardsByCategories.forEach((productCards, productCategory) => {
+                productCards.forEach(productCard => {
+                    const product = productsByCategories.get(productCategory)[productCard.id];
+
+                    if (productFilter.checkPriceRange(product.price)) {
+                        cards.append(productCard.codeHTML);
+                    }
+                });
+            });
         }
+    });
+
+    productFilter.subscribeToResetButton(() => {
+        displayProductCardsHTML(productCardsByCategories, productsByCategories, bascet);
     });
 
     productCardsByCategories.forEach((productCards, productCategory) => {

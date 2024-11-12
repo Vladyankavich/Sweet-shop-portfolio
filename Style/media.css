@@ -85,7 +85,7 @@
         padding: 1rem;
     }
 
-    .price_start, .price_final {
+    .price_min, .price_max {
         width: 4rem;
     }
 
@@ -129,7 +129,7 @@
         font-size: 1.6rem;
     }
 
-    .price_start, .price_final {
+    .price_min, .price_max {
         width: 3rem;
     }
 }

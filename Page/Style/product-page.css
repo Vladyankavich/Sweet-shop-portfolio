@@ -70,13 +70,13 @@
 }
 
 .product_button {
-    width: 12rem;
+    width: 14rem;
     height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;    
     background-color: #78181f;
-    border: 2px solid rgb(190, 169, 169);
+    border: 2px solid #c68286;
     border-radius: 8px;
     color: #fff;
     margin-left: 4rem;
