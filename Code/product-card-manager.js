@@ -185,6 +185,38 @@ export class ProductCardManager {
         }
     }
 
+    // Метод сортування карточок товарів
+    sortingProductCards(productCardsByCategories, productsByCategories, comparison) {
+        const sortedProductCardsByCategories = new Map();
+
+        productCardsByCategories.forEach((productCards, productCategory) => {
+            const sortedProductCards = [];
+
+            productCards.forEach(productCard => {
+                const product = productsByCategories.get(productCategory)[productCard.id];
+
+                if (comparison(product)) {
+                    sortedProductCards.push(productCard);
+                }
+            });
+
+            sortedProductCardsByCategories.set(productCategory, sortedProductCards);
+        });
+
+        return sortedProductCardsByCategories;
+    }
+
+    // Метод сортування карточок товарів по категоріям
+    sortingProductCardsByCategories(productCardsByCategories, categories) {
+        const sortedProductCardsByCategories = new Map();
+
+        categories.forEach(category => {
+            sortedProductCardsByCategories.set(category, productCardsByCategories.get(category));
+        });
+
+        return sortedProductCardsByCategories;
+    }
+
     // Метод випадкового вибору карток з каталогу продуктів
     getRandomProductCards(productCards, count) {
         const randomProducts = []; // Ствозюємо пустий масив, куди будемо додавати товари

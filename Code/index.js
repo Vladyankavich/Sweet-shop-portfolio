@@ -2,12 +2,14 @@ import { ProductFilter } from "./product-filter.js";
 import { ProductManager } from "./product-manager.js";
 import { ProductCardManager } from "./product-card-manager.js";
 import { BascetManager } from "./bascet-manager.js";
+import { ProductSearch } from "./product-search.js";
 import { MAX_PRODUCTS_COUNT, MIN_PRODUCTS_COUNT } from "./constants.js";
 
 const productManager = new ProductManager();
 const productCardManager = new ProductCardManager();
 const bascetManager = new BascetManager();
 const productFilter = new ProductFilter();
+const productSearch = new ProductSearch();
 
 function updateBascetInfoHTML(bascet) {
     const productsCountText = document.querySelector(".logo_bascet_count");
@@ -22,6 +24,8 @@ function updateBascetInfoHTML(bascet) {
 
 function displayProductCardsHTML(productCardsByCategories, productsByCategories, bascet) {
     const cards = document.querySelector(".cards"); // Змінна блоку для виводу карток
+
+    cards.innerHTML = "";
 
     productCardsByCategories.forEach((productCards, productCategory) => {
         productCards.forEach(productCard => {
@@ -40,72 +44,72 @@ window.addEventListener("DOMContentLoaded", () => {
     const productCardsByCategories = productCardManager.createAllProductCards(productsByCategories);
 
     productFilter.subscribeToProductCategoryButtonChange(() => {
-        const cards = document.querySelector(".cards"); // Змінна блоку для виводу карток
+        const sortingByPrice = productFilter.applied;
+        const sortingByCategories = productFilter.selectedCategories.size > 0;
+        let sortedProductCardsByCategories = new Map(productCardsByCategories);
 
-        cards.innerHTML = [];
-
-        if (!productFilter.active && productFilter.selectedCategories.size > 0) {
-            productFilter.selectedCategories.forEach(selectedCategory => {
-                productCardsByCategories.get(selectedCategory).forEach(productCard => {
-                    cards.append(productCard.codeHTML);
+        if (sortingByPrice) {
+            sortedProductCardsByCategories =
+                productCardManager.sortingProductCards(sortedProductCardsByCategories, productsByCategories, (product) => {
+                    return productFilter.checkPriceRange(product.price);
                 });
-            });
-        } else if (productFilter.active && productFilter.selectedCategories.size > 0) {
-            productFilter.selectedCategories.forEach(selectedCategory => {
-                productCardsByCategories.get(selectedCategory).forEach(productCard => {
-                    const product = productsByCategories.get(selectedCategory)[productCard.id];
-
-                    if (productFilter.checkPriceRange(product.price)) {
-                        cards.append(productCard.codeHTML);
-                    }
-                });
-            });
-        } else if (productFilter.active && productFilter.selectedCategories.size == 0) {
-            productCardsByCategories.forEach((productCards, productCategory) => {
-                productCards.forEach(productCard => {
-                    const product = productsByCategories.get(productCategory)[productCard.id];
-
-                    if (productFilter.checkPriceRange(product.price)) {
-                        cards.append(productCard.codeHTML);
-                    }
-                });
-            });
-        } else {
-            displayProductCardsHTML(productCardsByCategories, productsByCategories, bascet);
         }
+
+        if (sortingByCategories) {
+            sortedProductCardsByCategories =
+                productCardManager.sortingProductCardsByCategories(sortedProductCardsByCategories, productFilter.selectedCategories);
+        }
+        
+        displayProductCardsHTML(sortedProductCardsByCategories, productsByCategories, bascet);
     });
 
     productFilter.subscribeToConfirmButton(() => {
-        const cards = document.querySelector(".cards"); // Змінна блоку для виводу карток
+        const sortingByCategories = productFilter.selectedCategories.size > 0;
+        let sortedProductCardsByCategories = new Map(productCardsByCategories);
 
-        cards.innerHTML = [];
-
-        if (productFilter.selectedCategories.size > 0) {
-            productFilter.selectedCategories.forEach(selectedCategory => {
-                productCardsByCategories.get(selectedCategory).forEach(productCard => {
-                    const product = productsByCategories.get(selectedCategory)[productCard.id];
-
-                    console.log(productFilter.checkPriceRange(product.price));
-                    if (productFilter.checkPriceRange(product.price)) {
-                        cards.append(productCard.codeHTML);
-                    }
-                });
+        sortedProductCardsByCategories =
+            productCardManager.sortingProductCards(sortedProductCardsByCategories, productsByCategories, (product) => {
+                return productFilter.checkPriceRange(product.price);
             });
-        } else {
-            productCardsByCategories.forEach((productCards, productCategory) => {
-                productCards.forEach(productCard => {
-                    const product = productsByCategories.get(productCategory)[productCard.id];
 
-                    if (productFilter.checkPriceRange(product.price)) {
-                        cards.append(productCard.codeHTML);
-                    }
-                });
-            });
+        if (sortingByCategories) {
+            sortedProductCardsByCategories =
+                productCardManager.sortingProductCardsByCategories(sortedProductCardsByCategories, productFilter.selectedCategories);
         }
+
+        displayProductCardsHTML(sortedProductCardsByCategories, productsByCategories, bascet);
     });
 
     productFilter.subscribeToResetButton(() => {
         displayProductCardsHTML(productCardsByCategories, productsByCategories, bascet);
+    });
+
+    productSearch.subscribeToInput((value) => {
+        const sortingByPrice = productFilter.applied;
+        const sortingByCategories = productFilter.selectedCategories.size > 0;
+        const sortingByName = value.length > 0;
+        let sortedProductCardsByCategories = new Map(productCardsByCategories);
+
+        if (sortingByPrice) {
+            sortedProductCardsByCategories =
+                productCardManager.sortingProductCards(sortedProductCardsByCategories, productsByCategories, (product) => {
+                    return productFilter.checkPriceRange(product.price);
+                });
+        }
+
+        if (sortingByCategories) {
+            sortedProductCardsByCategories =
+                productCardManager.sortingProductCardsByCategories(sortedProductCardsByCategories, productFilter.selectedCategories);
+        }
+
+        if (sortingByName) {
+            sortedProductCardsByCategories =
+                productCardManager.sortingProductCards(sortedProductCardsByCategories, productsByCategories, (product) => {
+                    return product.name.includes(value);
+                });
+        }
+
+        displayProductCardsHTML(sortedProductCardsByCategories, productsByCategories, bascet);
     });
 
     productCardsByCategories.forEach((productCards, productCategory) => {

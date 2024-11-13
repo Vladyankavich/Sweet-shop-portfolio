@@ -5,7 +5,7 @@ export class ProductFilter {
         this.selectedCategories = new Set();
         this.minPrice = MIN_PRODUCT_PRICE;
         this.maxPrice = DEFAULT_PRODUCT_PRICE;
-        this.active = false;
+        this.applied = false;
 
         this.reset();
     }
@@ -21,7 +21,7 @@ export class ProductFilter {
         this.selectedCategories.clear();
         this.minPrice = MIN_PRODUCT_PRICE;
         this.maxPrice = DEFAULT_PRODUCT_PRICE;
-        this.active = false;
+        this.applied = false;
 
         fruitCandyBtn.checked = false;
         candiesInBoxesBtn.checked = false;
@@ -40,7 +40,7 @@ export class ProductFilter {
     displayResetButton() {
         const resetBtn = document.querySelector(".reset");
 
-        if (this.active || this.selectedCategories.size > 0) {
+        if (this.applied || this.selectedCategories.size > 0) {
             resetBtn.style.display = 'block';
         } else {
             resetBtn.style.display = 'none';
@@ -97,7 +97,7 @@ export class ProductFilter {
         confirmBtn.addEventListener("click", () => {
             this.minPrice = priceMinInput.value;
             this.maxPrice = priceMaxInput.value;
-            this.active = true;
+            this.applied = true;
 
             this.displayResetButton();
 
