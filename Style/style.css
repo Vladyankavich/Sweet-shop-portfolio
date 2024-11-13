@@ -25,11 +25,11 @@ a {
     box-shadow: 1px 1px 15px 0 #eee;
 }
 
-.header-navigation {
+.header_navigation {
     display: flex;
 }
 
-.header-navigation>ul{
+.header_navigation>ul{
     width: 40rem;
     display: inherit;
     align-items: center;
@@ -37,7 +37,7 @@ a {
     margin: 0;
 }
 
-.header-navigation>ul>li {
+.header_navigation>ul>li {
     display: inline;
     font-weight: 500;
     font-size: 3em;
@@ -52,7 +52,7 @@ a {
     background-color: hsl(0, 0%, 90%);
 }
 
-.search-box {
+.search_box {
     padding: 0 2.5rem;
     position: relative;
 }
@@ -71,7 +71,7 @@ a {
     padding-left: 3rem;
 }
 
-.search-btn {
+.search_btn {
     color: #333;
     position: absolute;
     top: 1rem;
@@ -79,12 +79,12 @@ a {
     cursor: pointer;
 }
 
-.search-btn img {
+.search_btn img {
     width: 2.5rem;
     height: 2.5rem;   
 }
 
-.logo-bascet {
+.logo_bascet {
     position: relative;
     width: 4.5rem;
     height: 4.5rem;
@@ -92,11 +92,11 @@ a {
     cursor: pointer;
 }
 
-.logo-bascet img {
+.logo_bascet img {
     width: 100%;
 }
 
-.logo-bascet-count {
+.logo_bascet_count {
     position: absolute;
     top: 0;
     left: 4rem;
@@ -122,7 +122,7 @@ a {
     margin: 0.5rem;
 }
 
-.section-one {
+.section_one {
     display: inherit;
     flex-direction: column;
     justify-content: start;
@@ -130,7 +130,7 @@ a {
     padding: 2rem;
 }
 
-.filter-checkbox {
+.filter_checkbox {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -139,15 +139,15 @@ a {
     margin: 1rem 0 3rem;
 }
 
-.filter-checkbox div {
+.filter_checkbox div {
     margin-bottom: 0.5rem;
 }
 
-.filter-checkbox input {
+.filter_checkbox input {
     cursor: pointer;
 }
 
-.filter-checkbox span {
+.filter_checkbox span {
     margin-left: 1rem;
 }
 
@@ -164,7 +164,7 @@ a {
     margin-top: 2rem;
 }
 
-.section-two {
+.section_two {
     width: 100%;
     margin: 2rem;    
 }
@@ -259,50 +259,50 @@ a {
     box-shadow: 1px 1px 15px 0 #eee;
 }
 
-.footer-contacts {
+.footer_contacts {
     display: flex;
     flex-direction: column;
 }
 
-.footer-contacts ul {
+.footer_contacts ul {
     list-style: none;
     padding: 0;
 }
 
-.footer-contacts li {
+.footer_contacts li {
     font-weight: 500;
     margin: 1rem;
 }
 
-.footer-messenger {
+.footer_messenger {
     display: flex;
     flex-direction: column;    
 }
 
-.footer-messenger ul {
+.footer_messenger ul {
     display: flex;
     justify-content: space-between;
     padding: 0;
 }
 
-.footer-messenger li {
+.footer_messenger li {
     list-style: none;
 }
 
-.footer-information {
+.footer_information {
     width: 40rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.footer-email, .footer-address {
+.footer_email, .footer_address {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.footer-email a, .footer-address a {
+.footer_email a, .footer_address a {
     font-weight: 500;
     margin: 1rem;
 }

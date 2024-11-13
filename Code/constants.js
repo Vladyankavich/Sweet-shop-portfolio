@@ -7,4 +7,4 @@ export const MIN_PRODUCTS_COUNT = 1;
 export const MAX_PRODUCTS_COUNT = 99;
 export const MIN_PRODUCT_PRICE = 0;
 export const MAX_PRODUCT_PRICE = 10000;
-export const DEFAULT_PRODUCT_PRICE = 1000;
+export const DEFAULT_PRODUCT_PRICE = 999;

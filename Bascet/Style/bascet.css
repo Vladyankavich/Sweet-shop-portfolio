@@ -21,17 +21,17 @@ html {
     padding: 3rem;
 }
 
-.header-bascet {
+.header_bascet {
    position: relative;
 }
 
-.header-bascet-name {
+.header_bascet_name {
     font-weight: 500;
     font-size: 5rem;
     color: #333; 
 }
 
-.header-bascet-group {
+.header_bascet_group {
     display: flex;
     justify-content: flex-end;
     font-weight: 400;
@@ -40,11 +40,11 @@ html {
     margin-bottom: 1.5rem;
 }
 
-.header-bascet-count {
+.header_bascet_count {
     margin: 0 5.3rem;
 }
 
-.header-bascet-cross {
+.header_bascet_cross {
     position: absolute;
     top: -1rem;
     right: -1rem;
@@ -53,7 +53,7 @@ html {
     cursor: pointer;
 }
 
-.main-bascet {
+.main_bascet {
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
@@ -137,24 +137,24 @@ html {
     width: 15px;
 }
 
-.footer-bascet {
+.footer_bascet {
     padding-top: 3rem;
 }
 
-.footer-bascet-group {
+.footer_bascet_group {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 2rem;
 }
 
-.footer-bascet-name {
+.footer_bascet_name {
     font-weight: 400;
     font-size: 1.5rem;
     margin-right: 3rem;
 }
 
-.footer-bascet-price {
+.footer_bascet_price {
     display: flex;
     justify-content: flex-end;
     font-weight: 600;
@@ -162,17 +162,17 @@ html {
     padding: 0 3rem;
 }
 
-.footer-bascet-price span{
+.footer_bascet_price span{
     margin-right: 0.5rem;
 }
 
-.footer-bascet-button {
+.footer_bascet_button {
     display: flex;
     justify-content: flex-end;
     
 }
 
-.footer-bascet-button button {
+.footer_bascet_button button {
     border: 1px solid #8f1c24;
     border-radius: 5px;
     background-color: #8f1c24;

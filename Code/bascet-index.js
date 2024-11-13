@@ -8,8 +8,8 @@ const productManager = new ProductManager();
 const productCardManager = new ProductCardManager();
 
 function displayProductCardsHTML(productCardsByCategories, productsByCategories) {
-    const cards = document.querySelector(".main-bascet");
-    const totalPriceText = document.querySelector(".footer-bascet-price span");
+    const cards = document.querySelector(".main_bascet");
+    const totalPriceText = document.querySelector(".footer_bascet_price span");
     let totalPrice = 0;
 
     cards.innerHTML = "";

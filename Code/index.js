@@ -10,7 +10,7 @@ const bascetManager = new BascetManager();
 const productFilter = new ProductFilter();
 
 function updateBascetInfoHTML(bascet) {
-    const productsCountText = document.querySelector(".logo-bascet-count");
+    const productsCountText = document.querySelector(".logo_bascet_count");
     let productsCount = 0;
 
     bascet.products.forEach(product => {

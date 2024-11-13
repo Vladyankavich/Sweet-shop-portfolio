@@ -12,9 +12,9 @@ export class ProductFilter {
 
     // Метод для скидання ціни та категорії товару в фільтрі
     reset() {
-        const fruitCandyBtn = document.querySelector(".fruit-candy");
-        const candiesInBoxesBtn = document.querySelector(".candies-in-boxes");
-        const giftSetsBtn = document.querySelector(".gift-sets");
+        const fruitCandyBtn = document.querySelector(".fruit_candy");
+        const candiesInBoxesBtn = document.querySelector(".candies_in_boxes");
+        const giftSetsBtn = document.querySelector(".gift_sets");
         const priceMinInput = document.querySelector(".price_min");
         const priceMaxInput = document.querySelector(".price_max");        
         
@@ -49,9 +49,9 @@ export class ProductFilter {
 
     // Метод підписки на подію натиску кнопки-прапору у фільтрі
     subscribeToProductCategoryButtonChange(callback) {
-        const fruitCandyBtn = document.querySelector(".fruit-candy");
-        const candiesInBoxesBtn = document.querySelector(".candies-in-boxes");
-        const giftSetsBtn = document.querySelector(".gift-sets");
+        const fruitCandyBtn = document.querySelector(".fruit_candy");
+        const candiesInBoxesBtn = document.querySelector(".candies_in_boxes");
+        const giftSetsBtn = document.querySelector(".gift_sets");
 
         fruitCandyBtn.addEventListener("change", (state) => {
             if (state.target.checked) {

@@ -1,31 +1,31 @@
 import { ProductPage } from "./product-page.js";
 
 export class ProductPageManager {
-    // Створюємо картку продукту
+    // Ствproduct-pageорюємо картку продукту
     createProductPageHTML (product) {
         const productPage = document.createElement("div");
-        productPage.classList.add("product-page");
+        productPage.classList.add("product_page");
 
         const sectionImage = document.createElement("section");
-        sectionImage.classList.add("section-image");
+        sectionImage.classList.add("section_image");
         sectionImage.innerHTML = `<img src=".${product.image}" alt="${product.name}">`;
 
         const sectionInformation = document.createElement("section");
-        sectionInformation.classList.add("section-information");
+        sectionInformation.classList.add("section_information");
 
         const productName = document.createElement("div");
-        productName.classList.add("product-name");
+        productName.classList.add("product_name");
         productName.innerHTML = `${product.name}`;
 
         const productPrice = document.createElement("div");
-        productPrice.classList.add("product-price");
+        productPrice.classList.add("product_price");
         productPrice.innerHTML = `${product.price} грн`;
 
         const productGroup = document.createElement("div");
-        productGroup.classList.add("product-group");
+        productGroup.classList.add("product_group");
 
         const productCount = document.createElement("div");
-        productCount.classList.add("product-count");
+        productCount.classList.add("product_count");
 
         const productBtnMinus = document.createElement("button");
         productBtnMinus.classList.add("product_btn_minus");
@@ -48,7 +48,7 @@ export class ProductPageManager {
         productGroup.append(productCount, productButton);
 
         const productDescription = document.createElement("div");
-        productDescription.classList.add("product-description");
+        productDescription.classList.add("product_description");
         productDescription.innerHTML = `<span>Опис: </span>${product.description}`;
 
         sectionInformation.append(productName, productPrice, productGroup, productDescription);
@@ -61,7 +61,7 @@ export class ProductPageManager {
     updateProductPageHTML(product, productPage, inBascet) {
         const productsCountText = productPage.codeHTML.querySelector(".products_count");
         const productBuyButton = productPage.codeHTML.querySelector(".product_button");        
-        const productPriceText = productPage.codeHTML.querySelector(".product-price");
+        const productPriceText = productPage.codeHTML.querySelector(".product_price");
     
         if (inBascet) {
             productBuyButton.innerText = "У кошику";

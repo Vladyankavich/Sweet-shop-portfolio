@@ -8,7 +8,7 @@ const bascetManager = new BascetManager();
 const productPageManager = new ProductPageManager();
 
 function displayProductPage(product, productPage, bascet) {
-    const mainProductPage = document.querySelector(".main_product-page");
+    const mainProductPage = document.querySelector(".main_product_page");
 
     productPageManager.updateProductPageHTML(product, productPage, bascet.has(product));
 
