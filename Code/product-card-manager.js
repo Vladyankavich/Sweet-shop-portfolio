@@ -64,6 +64,8 @@ export class ProductCardManager {
         }
         else{
             productBuyButton.innerText = "Купити";
+            productBuyButton.style.backgroundColor = "#78181f";
+            productBuyButton.style.color = "white";
         }
     
         productsCountText.innerText = `${product.count}`;
@@ -128,7 +130,7 @@ export class ProductCardManager {
         const productPriceText = productCard.codeHTML.querySelector(".card_bascet_price");
     
         productsCountText.innerText = `${product.count}`;
-        productPriceText.innerText = `${product.price} грн`;
+        productPriceText.innerText = `${product.totalPrice()} грн`;
     }
 
     // Метод створення масиву карток

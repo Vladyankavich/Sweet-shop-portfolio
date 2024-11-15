@@ -34,4 +34,8 @@ export class Product {
     totalPrice() {
         return (this.price * this.count);
     }
+
+    reset() {
+        this.count = 1;
+    }
 }

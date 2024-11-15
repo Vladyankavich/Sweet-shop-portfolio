@@ -42,4 +42,26 @@ export class Bascet {
             }
         }
     }
+
+    subscribeToOpenBascetButton(callback) {
+        const btn = document.querySelector(".logo_bascet");
+
+        btn.addEventListener("click", () => {
+            const modalWindow = document.querySelector(".bascet_modal")
+            modalWindow.classList.add("open");
+
+            callback();
+        });
+    }
+
+    subscribeToCloseBascetButton(callback) {
+        const btn = document.querySelector(".header_bascet_cross");
+
+        btn.addEventListener("click", () => {
+            const modalWindow = document.querySelector(".bascet_modal")
+            modalWindow.classList.remove("open");
+
+            callback();
+        });
+    }
 }

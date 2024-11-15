@@ -37,11 +37,80 @@ function displayProductCardsHTML(productCardsByCategories, productsByCategories,
     });
 }
 
+function displayProductCardsForBascetHTML(productCardsByCategories, productsByCategories) {
+    const cards = document.querySelector(".main_bascet");
+    const totalPriceText = document.querySelector(".footer_bascet_price span");
+    let totalPrice = 0;
+
+    cards.innerHTML = "";
+
+    productCardsByCategories.forEach((productCards, productCategory) => {
+        productCards.forEach(productCard => {
+            const product = productsByCategories.get(productCategory)[productCard.id];
+            
+            totalPrice += product.totalPrice();
+            
+            cards.append(productCard.codeHTML);
+            productCardManager.updateProductCardForBascetHTML(product, productCard);
+        });
+    });
+
+    totalPriceText.innerText = totalPrice;
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     //Змінні
     const productsByCategories = productManager.createAllProducts();
     const bascet = bascetManager.loadBascet(productsByCategories);
     const productCardsByCategories = productCardManager.createAllProductCards(productsByCategories);
+
+    bascet.subscribeToOpenBascetButton(() => {
+        const productCardsForBascetByCategories = productCardManager.createProductCardsForBascet(bascet.products);
+
+        productCardsForBascetByCategories.forEach((productCards, productCategory) => {
+            productCardManager.subscribeToRemoveProductFromBascetButtonClickInProductCards(productCards, (productCard) => {
+                const product = productsByCategories.get(productCategory)[productCard.id];
+
+                product.reset();
+                bascet.remove(product);
+                bascetManager.saveBascet(bascet);
+                productCardManager.removeProductCardForBascet(productCards, product);
+    
+                displayProductCardsForBascetHTML(productCardsForBascetByCategories, productsByCategories);
+            });
+    
+            productCardManager.subscribeToIncreaseCountButtonClickInProductCards(productCards, (productCard) => {
+                const product = productsByCategories.get(productCategory)[productCard.id];
+                
+                if(product.count < MAX_PRODUCTS_COUNT) {
+                    product.count++;
+                }
+    
+                bascetManager.saveBascet(bascet);
+    
+                displayProductCardsForBascetHTML(productCardsForBascetByCategories, productsByCategories);
+            });
+    
+            productCardManager.subscribeToReduceCountButtonClickInProductCards(productCards, (productCard) => {
+                const product = productsByCategories.get(productCategory)[productCard.id];
+                
+                if(product.count > MIN_PRODUCTS_COUNT) {
+                    product.count--;
+                }
+    
+                bascetManager.saveBascet(bascet);
+    
+                displayProductCardsForBascetHTML(productCardsForBascetByCategories, productsByCategories);
+            });
+        });
+    
+        displayProductCardsForBascetHTML(productCardsForBascetByCategories, productsByCategories);
+    });
+
+    bascet.subscribeToCloseBascetButton(() => { 
+        updateBascetInfoHTML(bascet);
+        displayProductCardsHTML(productCardsByCategories, productsByCategories, bascet);
+    });
 
     productFilter.subscribeToProductCategoryButtonChange(() => {
         const sortingByPrice = productFilter.applied;
